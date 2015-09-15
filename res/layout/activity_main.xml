@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#95a5a6"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <fragment
+        android:id="@+id/music_fragment"
+        android:name="com.example.musicplayer.MusicFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+         />
+
+    <LinearLayout
+        android:id="@+id/example_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        <ImageButton 
+            android:id="@+id/back_button"
+            android:layout_height="match_parent"
+           	android:layout_width="0dp"
+           	android:layout_weight="3"
+            android:padding="10dp"
+           	android:src="@drawable/back_button"
+           	android:contentDescription="This is a back button"
+            />
+        
+        <ImageButton 
+            android:id="@+id/play_button"
+            android:layout_height="match_parent"
+           	android:layout_width="0dp"
+           	android:layout_weight="3"
+            android:padding="10dp"
+           	android:contentDescription="This is a play button"
+            />
+        	 	<!--   android:src="@drawable/play_button" -->
+       <ImageButton 
+            android:id="@+id/next_button"
+            android:layout_height="match_parent"
+           	android:layout_width="0dp"
+           	android:layout_weight="3"
+            android:padding="10dp"
+           	android:src="@drawable/next_button"
+           	android:contentDescription="This is a back button"
+            />
+       
+    </LinearLayout>
+"
+
+</LinearLayout>
