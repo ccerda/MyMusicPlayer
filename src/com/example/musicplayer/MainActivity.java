@@ -20,6 +20,7 @@ public class MainActivity extends Activity implements MusicFragment.onListItemCl
 	MusicPlayer mPlayer;
 	MusicFragment mFragment;
 	boolean isPlayPressed;
+	boolean firstButtonPress; 
 	
 
     @Override
@@ -30,9 +31,9 @@ public class MainActivity extends Activity implements MusicFragment.onListItemCl
         
         ActionBar bar = getActionBar();
         playButton = (ImageButton)findViewById(R.id.play_button);
-        playButton.setBackgroundResource(R.drawable.play_button);
         mPlayer = new MusicPlayer(this);
         isPlayPressed = false;
+        firstButtonPress = false;
         onPlayButtonListener();
         
     }
@@ -54,14 +55,17 @@ public class MainActivity extends Activity implements MusicFragment.onListItemCl
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(MainActivity.this, "Button works", Toast.LENGTH_LONG).show();
-				if(isPlayPressed == false){
-					mPlayer.playMusic();
-					playButton.setBackgroundResource(R.drawable.stop_button);
+				if(isPlayPressed == false && firstButtonPress == false){
+					mPlayer.playFirstSong();
+					firstButtonPress = true;
+					isPlayPressed = true;
+				}
+				else if(isPlayPressed == false){
+					mPlayer.resumePlayer();
 					isPlayPressed = true;
 				}
 				else if(isPlayPressed == true){
-					mPlayer.pauseMusic();
-					playButton.setBackgroundResource(R.drawable.play_button);
+					mPlayer.pausePlayer();
 					isPlayPressed = false;
 				}
 				
@@ -75,6 +79,10 @@ public class MainActivity extends Activity implements MusicFragment.onListItemCl
 	public void onListItemPicked(int position) { // this is used to communicate between MusicFragment and MainActivity
 		Log.d("CAC", "Listener success, position: " + position);
 		mPlayer.playMusic(position);
+		isPlayPressed = true;
+		if(firstButtonPress == false){ // this will make sure to get rid of first press play action if first song is selected thru list
+			firstButtonPress = true; 
+		}
 	}
 	
 //	private void getMusicList(){
