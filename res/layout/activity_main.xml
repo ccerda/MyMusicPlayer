@@ -11,46 +11,58 @@
         android:name="com.example.musicplayer.MusicFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
-         />
+        android:layout_weight="5" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:background="#FFF">
+		
+        <TextView
+            android:layout_height="match_parent" 
+            android:layout_width="match_parent"
+            android:id="@+id/current_song_view" />
+    </LinearLayout>
+    
     <LinearLayout
         android:id="@+id/example_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal" >
-        <ImageButton 
+
+        <ImageButton
             android:id="@+id/back_button"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-           	android:layout_width="0dp"
-           	android:layout_weight="3"
+            android:layout_weight="3"
+            android:contentDescription="This is a back button"
             android:padding="10dp"
-           	android:src="@drawable/back_button"
-           	android:contentDescription="This is a back button"
-            />
-        
-        <ImageButton 
+            android:src="@drawable/back_button" />
+
+        <ImageButton
             android:id="@+id/play_button"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-           	android:layout_width="0dp"
-           	android:layout_weight="3"
+            android:layout_weight="3"
+            android:contentDescription="This is a play button"
             android:padding="10dp"
-            android:src="@drawable/play_button"
-           	android:contentDescription="This is a play button"
-            />
-        	 	<!--   android:src="@drawable/play_button" -->
-       <ImageButton 
+            android:src="@drawable/play_button" />
+        <!-- android:src="@drawable/play_button" -->
+
+        <ImageButton
             android:id="@+id/next_button"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-           	android:layout_width="0dp"
-           	android:layout_weight="3"
+            android:layout_weight="3"
+            android:contentDescription="This is a back button"
             android:padding="10dp"
-           	android:src="@drawable/next_button"
-           	android:contentDescription="This is a back button"
-            />
-       
+            android:src="@drawable/next_button" />
     </LinearLayout>
-"
+
+    
 
 </LinearLayout>

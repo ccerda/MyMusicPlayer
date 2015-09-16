@@ -54,6 +54,10 @@ public class MusicPlayer {
 	public void resetPlayer() {
 		mPlayer.reset();
 	}
+	
+	public void stopPlayer() {
+		mPlayer.stop();
+	}
 	private void startPlayer(int songPosition) {
 		File[] musicFiles = musicDir.listFiles();
 		Uri musicUri = Uri.fromFile(musicFiles[songPosition]);

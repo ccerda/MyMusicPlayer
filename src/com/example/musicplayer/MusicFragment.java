@@ -39,7 +39,7 @@ public class MusicFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		Log.d("CAC", l.getItemAtPosition(position).toString());
+		// Log.d("CAC", l.getItemAtPosition(position).toString());
 		try {
 			((onListItemClickListener) activity).onListItemPicked(position);
 		} catch (ClassCastException cce) {
