@@ -14,7 +14,7 @@
         android:layout_weight="5" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -22,9 +22,15 @@
         android:background="#FFF">
 		
         <TextView
-            android:layout_height="match_parent" 
+            android:layout_height="0dp" 
             android:layout_width="match_parent"
+            android:layout_weight="2"
             android:id="@+id/current_song_view" />
+        <SeekBar 
+            android:id="@+id/playback_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
     </LinearLayout>
     
     <LinearLayout
