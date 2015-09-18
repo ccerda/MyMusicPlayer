@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -79,8 +80,8 @@ public class MainActivity extends Activity implements
 					firstButtonPress = true;
 					currPosition = 0;
 					isPlayPressed = true;
-					currentSongText.setText("Current Song: "
-							+ getMusicFileName(0));
+					currentSongText.setText(getMusicFileName(0));
+					setMusicPlayerOnCompletionListener();
 				} else if (isPlayPressed == false) {
 					mPlayer.resumePlayer();
 					isPlayPressed = true;
@@ -107,8 +108,8 @@ public class MainActivity extends Activity implements
 					mPlayer.playMusic(currPosition);
 					setMusicBarListener(mPlayer.mPlayer);
 					startMusicBar(mPlayer.mPlayer);
-					currentSongText.setText("Current Song: "
-							+ getMusicFileName(currPosition));
+					currentSongText.setText(getMusicFileName(currPosition));
+					setMusicPlayerOnCompletionListener();
 					if (isPlayPressed == false) {
 						isPlayPressed = true;
 					}
@@ -136,8 +137,8 @@ public class MainActivity extends Activity implements
 					mPlayer.playMusic(currPosition);
 					setMusicBarListener(mPlayer.mPlayer);
 					startMusicBar(mPlayer.mPlayer);
-					currentSongText.setText("Current Song: "
-							+ getMusicFileName(currPosition));
+					currentSongText.setText(getMusicFileName(currPosition));
+					setMusicPlayerOnCompletionListener();
 					if (isPlayPressed == false) {
 						isPlayPressed = true;
 					}
@@ -146,6 +147,7 @@ public class MainActivity extends Activity implements
 					mPlayer.playMusic(0);
 					setMusicBarListener(mPlayer.mPlayer);
 					startMusicBar(mPlayer.mPlayer);
+					setMusicPlayerOnCompletionListener();
 				}
 
 			}
@@ -162,12 +164,11 @@ public class MainActivity extends Activity implements
 		startMusicBar(mPlayer.mPlayer);
 		currPosition = position;
 		isPlayPressed = true;
-		currentSongText.setText("Current Song: "
-				+ getMusicFileName(currPosition));
-		if (firstButtonPress == false) { // this will make sure to get rid of
-											// first press play action if first
+		currentSongText.setText(getMusicFileName(currPosition));
+		setMusicPlayerOnCompletionListener();
+		if (firstButtonPress == false) { 	// this will make sure to get rid of
+			firstButtonPress = true;		// first press play action if first
 											// song is selected thru list
-			firstButtonPress = true;
 		}
 	}
 
@@ -185,7 +186,7 @@ public class MainActivity extends Activity implements
 				.getAbsolutePath());
 		File musicDir = new File(root, "media/music");
 		String[] musicFiles = musicDir.list();
-		return musicFiles[position];
+		return musicFiles[position].split("\\.")[0];
 	}
 
 	private void startMusicBar(final MediaPlayer mediaPlayer) {
@@ -236,6 +237,31 @@ public class MainActivity extends Activity implements
 		});
 	}
 
+	private void setMusicPlayerOnCompletionListener(){
+		mPlayer.mPlayer.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				int musicTotal = getTotalMusicCount();
+				if (currPosition < musicTotal - 1) {
+					currPosition++;
+					mPlayer.playMusic(currPosition);
+					setMusicBarListener(mPlayer.mPlayer);
+					startMusicBar(mPlayer.mPlayer);
+					currentSongText.setText(getMusicFileName(currPosition));
+					if (isPlayPressed == false) {
+						isPlayPressed = true;
+					}
+				} else {
+					mPlayer.resetPlayer();
+					firstButtonPress = false;
+					isPlayPressed = false;
+					currentSongText.setText("");
+				}
+				
+			}
+		});
+	}
 	// private void getMusicList(){
 	// File root = new
 	// File(Environment.getExternalStorageDirectory().getAbsolutePath());

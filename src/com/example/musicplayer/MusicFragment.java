@@ -1,12 +1,12 @@
 package com.example.musicplayer;
 
 import java.io.File;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,6 +14,9 @@ import android.widget.ListView;
 public class MusicFragment extends ListFragment {
 
 	public String[] musicList = getMusicList();
+	public int musicSize = musicList.length;
+	
+	
 	public String songName; // will use this when clicked to save name of song
 							// requested to be played
 	Activity activity;
@@ -23,7 +26,11 @@ public class MusicFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		for(int i = 0; i < musicSize; i++){
+			musicList[i] = musicList[i].split("\\.")[0];
+		}
+		Arrays.sort(musicList, String.CASE_INSENSITIVE_ORDER);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, musicList);
 
@@ -58,5 +65,5 @@ public class MusicFragment extends ListFragment {
 		String[] musicFiles = musicDir.list();
 		return musicFiles;
 	}
-
+	
 }
