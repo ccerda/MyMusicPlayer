@@ -30,7 +30,8 @@ public class MusicFragment extends ListFragment {
 		for(int i = 0; i < musicSize; i++){
 			musicList[i] = musicList[i].split("\\.")[0];
 		}
-		Arrays.sort(musicList, String.CASE_INSENSITIVE_ORDER);
+		// Only use this if every other musicList is sorted
+		//Arrays.sort(musicList, String.CASE_INSENSITIVE_ORDER);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				android.R.layout.simple_list_item_1, musicList);
 
